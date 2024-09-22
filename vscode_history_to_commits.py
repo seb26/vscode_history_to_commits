@@ -24,6 +24,10 @@ def main(args):
         # Ideally this can be overridden with a CLI arg like force
         print(f"Aborting, directory is not named `.history`: {dir_history}")
         sys.exit(1)
+    if not dir_working.exists():
+        print(f"Aborting, working directory does not exist: {dir_working}")
+        print("Check the directory path is correct, or create the directory and initialise a Git repo inside it first.")
+        sys.exit(1)
     for filepath in sorted(dir_history.rglob("*")):
         if filepath.is_file():
             pattern = r'^(?P<basename>.*)_(?P<date>\d{14})\.(?P<ext>.*)$'
